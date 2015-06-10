@@ -113,3 +113,83 @@
 * CB-6781: Continue previous commit with one new instance (This closes #30)
 * CB-6781: add the exception text to the error object
 * CB-6890: Fix pluginManager access for 4.0.x branch
+
+### 0.4.6 (Sep 17, 2014)
+* CB-7471 cordova-plugin-file-transfer documentation translation
+* CB-7249 cordova-plugin-file-transfer documentation translation
+* CB-7423 fix spec28,29 lastProgressEvent not visible to afterEach function
+* Amazon related changes.
+* Remove dupe file windows+windows8 both use the same one
+* CB-7316 Updates docs with actual information.
+* CB-7316 Adds support for Windows platform, moves \*Proxy files to proper directory.
+* CB-7316 Improves current specs compatibility:
+* added documentation for new test
+* CB-6466 Fix failing test due to recent url change
+* CB-6466 created mobile-spec test
+* Renamed test dir, added nested plugin.xml and test
+* Fixed failing spec.19 on wp8
+* added documentation to manual tests
+* CB-6961 port file-transfer tests to framework
+
+### 0.4.7 (Oct 03, 2014)
+* Construct proper FileEntry with nativeURL property set
+* CB-7532 Handle non-existent download dirs properly
+* CB-7529 Adds support for 'ms-appdata' URIs for windows
+
+### 0.4.8 (Dec 02, 2014)
+* CB-8021 - adds documentation for `httpMethod` to `doc/index.md`. However, translations still need to be addressed.
+* CB-7223 spec.27 marked pending for **wp8**
+* CB-6900 fixed `spec.7` for **wp8**
+* CB-7944 Pended unsupported auto tests for *Windows*
+* CB-7977 Mention `deviceready` in plugin docs
+* CB-7700 cordova-plugin-file-transfer documentation translation: cordova-plugin-file-transfer
+
+### 0.5.0 (Feb 04, 2015)
+* CB-8407 windows: Fix download of `ms-appdata:///` URIs
+* CB-8095 windows: Rewrite upload method to support progress events properly
+* CB-5059 android: Add a CookieManager abstraction for pluggable webviews
+* ios: Fix compile warning about implicity int conversion
+* CB-8351 ios: Use argumentForIndex rather than NSArray extension
+* CB-8351 ios: Use a local copy of DLog macro rather than CordovaLib version
+* CB-8296 ios: Fix crash when upload fails and file is not yet created (close #57)
+* Document "body" property on FileTransferError
+* CB-7912 ios, android: Update to work with whitelist plugins in Cordova 4.x
+* Error callback should always be called with the FileTransferError object, and not just the code
+* windows: alias appData to Windows.Storage.ApplicationData.current
+* CB-8093 Fixes incorrect FileTransferError returned in case of download failure
+
+### 1.0.0 (Apr 15, 2015)
+* CB-8746 bumped version of file dependency
+* CB-8746 gave plugin major version bump
+* CB-8641 Fixed tests to pass on windows and wp8
+* CB-8583 Forces download to overwrite existing target file
+* CB-8589 Fixes upload failure when server's response doesn't contain any data
+* CB-8747 updated dependency, added peer dependency
+* CB-8683 changed plugin-id to pacakge-name
+* CB-8653 properly updated translated docs to use new id
+* CB-8653 updated translated docs to use new id
+* Use TRAVIS_BUILD_DIR, install paramedic by npm
+* CB-8653 Updated Readme
+* CB-8654 Note WP8 download requests caching in docs
+* CB-8590 (Windows) Fixed download.onprogress.lengthComputable
+* CB-8566 Integrate TravisCI
+* CB-8438 cordova-plugin-file-transfer documentation translation: cordova-plugin-file-transfer
+* CB-8538 Added package.json file
+* CB-8495 Fixed wp8 and wp81 test failures
+* CB-7957 Adds support for `browser` platform
+* CB-8429 Updated version and RELEASENOTES.md for release 0.5.0 (take 2)
+* Fixes typo, introduced in https://github.com/apache/cordova-plugin-file-transfer/commit/bc43b46
+* CB-8407 Use File proxy to construct valid FileEntry for download success callback
+* CB-8407 Removes excess path to native path conversion in download method
+* CB-8429 Updated version and RELEASENOTES.md for release 0.5.0
+* CB-7957 Adds support for `browser` platform
+* CB-8095 Fixes JSHint and formatting issues
+* CB-8095 Updates tests and documentation
+* CB-8095 Rewrite upload method to support progress events properly
+* android: Fix error reporting for unknown uri type on sourceUri instead of targetUri
+
+### 1.1.0 (May 06, 2015)
+* CB-8951 Fixed crash related to headers parsing on **wp8**
+* CB-8933 Increased download and upload test timeout
+* CB-6313 **wp8**: Extra boundary in upload
+* CB-8761 **wp8**: Copy cookies from WebBrowser

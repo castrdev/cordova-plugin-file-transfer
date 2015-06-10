@@ -17,32 +17,44 @@
     under the License.
 -->
 
-# org.apache.cordova.file-transfer
+# cordova-plugin-file-transfer
 
 Plugin pozwala na przesyłanie i pobieranie plików.
 
-## Instalacji
+Ten plugin określa globalne `FileTransfer`, `FileUploadOptions` konstruktorów.
 
-    cordova plugin add org.apache.cordova.file-transfer
+Chociaż w globalnym zasięgu, są nie dostępne dopiero po `deviceready` imprezie.
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(FileTransfer);
+    }
+    
+
+## Instalacja
+
+    cordova plugin add cordova-plugin-file-transfer
     
 
 ## Obsługiwane platformy
 
-*   Amazon ogień OS
+*   Amazon Fire OS
 *   Android
-*   Jeżyna 10
+*   BlackBerry 10
+*   Przeglądarka
 *   Firefox OS **
 *   iOS
 *   Windows Phone 7 i 8 *
-*   Windows 8 *
+*   Windows 8
+*   Windows
 
-* *Nie obsługują `onprogress` ani `abort()` *
+* *Nie obsługują `onprogress` ani `abort()`*
 
-** *Nie obsługują `onprogress` *
+* * *Nie obsługują `onprogress`*
 
 # FileTransfer
 
-`FileTransfer`Obiekt zapewnia sposób wgrać pliki przy użyciu żądania HTTP wieloczęściowe POST i pobierania plików, jak również.
+Obiekt `FileTransfer` zapewnia sposób wgrać pliki przy użyciu żądania HTTP wieloczęściowe POST i pobierania plików, jak również.
 
 ## Właściwości
 
@@ -64,18 +76,19 @@ Plugin pozwala na przesyłanie i pobieranie plików.
 
 *   **serwer**: adres URL serwera, aby otrzymać plik, jak kodowane przez`encodeURI()`.
 
-*   **successCallback**: wywołania zwrotnego, który jest przekazywany `Metadata` obiektu. *(Funkcja)*
+*   **successCallback**: wywołania zwrotnego, który jest przekazywany obiekt `FileUploadResult`. *(Funkcja)*
 
-*   **errorCallback**: wywołanie zwrotne, które wykonuje, jeżeli wystąpi błąd pobierania `Metadata` . Wywołany z `FileTransferError` obiektu. *(Funkcja)*
+*   **errorCallback**: wywołanie zwrotne, które wykonuje, jeżeli wystąpi błąd pobierania `FileUploadResult`. Wywoływany z obiektu `FileTransferError`. *(Funkcja)*
 
 *   **Opcje**: parametry opcjonalne *(obiektu)*. Ważne klucze:
     
     *   **fileKey**: nazwa elementu form. Domyślnie `file` . (DOMString)
     *   **Nazwa pliku**: nazwy pliku, aby użyć podczas zapisywania pliku na serwerze. Domyślnie `image.jpg` . (DOMString)
-    *   **mimeType**: Typ mime danych do przesłania. Domyślnie `image/jpeg` . (DOMString)
-    *   **Parametry**: zestaw par opcjonalny klucz/wartość w żądaniu HTTP. (Obiekt)
-    *   **chunkedMode**: czy przekazać dane w trybie pakietowego przesyłania strumieniowego. Domyślnie `true` . (Wartość logiczna)
-    *   **nagłówki**: Mapa wartości Nazwa/nagłówka nagłówek. Aby określić więcej niż jedną wartość, należy użyć tablicę. (Obiekt)
+    *   **element httpMethod**: Metoda HTTP do użycia - `umieścić` lub `POST`. Domyślnie `POST`. (DOMString)
+    *   **mimeType**: Typ mime danych do przesłania. Domyślnie do `image/jpeg`. (DOMString)
+    *   **params**: zestaw par opcjonalny klucz/wartość w żądaniu HTTP. (Obiekt)
+    *   **chunkedMode**: czy przekazać dane w trybie pakietowego przesyłania strumieniowego. Wartością domyślną jest `true`. (Wartość logiczna)
+    *   **headers**: Mapa wartości Nazwa/nagłówka nagłówek. Aby określić więcej niż jedną wartość, należy użyć tablicę. (Obiekt)
 
 *   **trustAllHosts**: parametr opcjonalny, domyślnie `false` . Jeśli zestaw `true` , to akceptuje wszystkie certyfikaty bezpieczeństwa. Jest to przydatne, ponieważ Android odrzuca Certyfikaty samopodpisane. Nie zaleca się do użytku produkcyjnego. Obsługiwane na Androida i iOS. *(wartość logiczna)*
 
@@ -149,7 +162,7 @@ Plugin pozwala na przesyłanie i pobieranie plików.
 
 ## FileUploadResult
 
-A `FileUploadResult` obiekt jest przekazywany do funkcji callback sukces z `FileTransfer` obiektu `upload()` Metoda.
+Obiekt `FileUploadResult` jest przekazywana do sukcesu wywołania zwrotnego metody `upload() służącą` obiektu `FileTransfer`.
 
 ### Właściwości
 
@@ -163,11 +176,11 @@ A `FileUploadResult` obiekt jest przekazywany do funkcji callback sukces z `File
     
     *   Obecnie obsługiwane na iOS tylko.
 
-### iOS dziwactwa
+### Dziwactwa iOS
 
 *   Nie obsługuje `responseCode` lub`bytesSent`.
 
-## Pobierz za darmo
+## download
 
 **Parametry**:
 
@@ -177,7 +190,7 @@ A `FileUploadResult` obiekt jest przekazywany do funkcji callback sukces z `File
 
 *   **successCallback**: wywołania zwrotnego, który jest przekazywany `FileEntry` obiektu. *(Funkcja)*
 
-*   **errorCallback**: wywołanie zwrotne, które wykonuje, jeśli wystąpi błąd podczas pobierania `Metadata` . Wywołany z `FileTransferError` obiektu. *(Funkcja)*
+*   **errorCallback**: wywołanie zwrotne, które wykonuje, jeśli wystąpi błąd podczas pobierania `FileEntry`. Wywoływany z obiektu `FileTransferError`. *(Funkcja)*
 
 *   **trustAllHosts**: parametr opcjonalny, domyślnie `false` . Jeśli zestaw `true` , to akceptuje wszystkie certyfikaty bezpieczeństwa. Jest to przydatne, ponieważ Android odrzuca Certyfikaty samopodpisane. Nie zaleca się do użytku produkcyjnego. Obsługiwane na Androida i iOS. *(wartość logiczna)*
 
@@ -211,7 +224,7 @@ A `FileUploadResult` obiekt jest przekazywany do funkcji callback sukces z `File
     );
     
 
-## przerwanie
+## abort
 
 Przerywa w toku transferu. Onerror callback jest przekazywany obiekt FileTransferError, który kod błędu z FileTransferError.ABORT_ERR.
 
@@ -243,7 +256,7 @@ Przerywa w toku transferu. Onerror callback jest przekazywany obiekt FileTransfe
 
 ## FileTransferError
 
-A `FileTransferError` obiekt jest przekazywany do wywołania zwrotnego błąd, gdy wystąpi błąd.
+Obiekt `FileTransferError` jest przekazywana do błąd wywołania zwrotnego, gdy wystąpi błąd.
 
 ### Właściwości
 
@@ -255,7 +268,9 @@ A `FileTransferError` obiekt jest przekazywany do wywołania zwrotnego błąd, g
 
 *   **HTTP_STATUS**: kod stanu HTTP. Ten atrybut jest dostępna tylko po otrzymaniu kodu odpowiedzi z połączenia HTTP. (Liczba)
 
-*   **wyjątek**: albo e.getMessage lub e.toString (String)
+*   **body** Treść odpowiedzi. Ten atrybut jest dostępna tylko wtedy, gdy odpowiedź jest otrzymanych od połączenia HTTP. (String)
+
+*   **exception**: albo e.getMessage lub e.toString (String)
 
 ### Stałe
 
@@ -275,13 +290,13 @@ Poprzednie wersje tego pluginu tylko zaakceptować urządzenia bezwzględnych ś
 
 Do tyłu zgodności, akceptowane są jeszcze te ścieżki, i jeśli aplikacja nagrał ścieżki, jak te w trwałej pamięci, następnie można nadal stosować.
 
-Te ścieżki były wcześniej wystawione w `fullPath` właściwości `FileEntry` i `DirectoryEntry` obiektów zwróconych przez wtyczki pliku. Nowe wersje pliku plugin, jednak już wystawiać te ścieżki do JavaScript.
+Te ścieżki były narażone wcześniej we właściwości `fullPath` `FileEntry` i `DirectoryEntry` obiektów zwróconych przez wtyczki pliku. Nowe wersje pliku plugin, jednak już wystawiać te ścieżki do JavaScript.
 
-Jeśli uaktualniasz nowy (1.0.0 lub nowsza) wersji pliku, a wcześniej za pomocą `entry.fullPath` jako argumenty do `download()` lub `upload()` , a następnie trzeba będzie zmienić kod aby używać adresów URL plików zamiast.
+Jeśli uaktualniasz nowy (1.0.0 lub nowsza) wersja pliku i mieć wcześniej przy `entry.fullPath` jako argumenty `download()` lub `upload() służącą`, a następnie trzeba będzie zmienić kod aby używać adresów URL plików zamiast.
 
-`FileEntry.toURL()`i `DirectoryEntry.toURL()` zwraca adres URL plików formularza
+`FileEntry.toURL()` i `DirectoryEntry.toURL()` zwraca adres URL plików formularza
 
     cdvfile://localhost/persistent/path/to/file
     
 
-które mogą być używane zamiast bezwzględna ścieżka w obu `download()` i `upload()` metody.
+które mogą być używane zamiast bezwzględna ścieżka zarówno `download()` i `metody upload()` metody.
