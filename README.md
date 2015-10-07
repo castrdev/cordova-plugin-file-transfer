@@ -17,6 +17,7 @@
          under the License.
 -->
 
+Version 1.2.0 with XWalkCookieManager replaced by XWalkCordovaCookieManager.
 Version 1.1.0 with CookieManager replaced by XWalkCookieManager.
 
 # cordova-plugin-file-transfer
